@@ -5,7 +5,7 @@ class MyFloat
 
   @value = 0
 
-  def initialize(value = 0b00111111100000000000000000000000)
+  def initialize(value = 0)
     @value = value
     # Limit to 32 bit
     @value &= (2**32-1)
@@ -13,7 +13,7 @@ class MyFloat
 
   def value()
     # Special value for 0
-    if (fraction() == 1.0 and exponent() == 0)
+    if (fraction() == 1.0 and exponent() ==  -OFFSET_BIAS)
       return sign() ? -0.0 : 0.0
     end
     (-1)**sign() * fraction() * 2**exponent()
