@@ -11,6 +11,10 @@ RSpec.describe MyFloat do
        f = MyFloat.new 1
        expect(f.value).to eq 1
     end
+    it "should represent 0.15625 correctly" do
+       f = MyFloat.new 0b00111110001000000000000000000000
+       expect(f.value).to eq 0.15625
+    end
   end
 
 end
