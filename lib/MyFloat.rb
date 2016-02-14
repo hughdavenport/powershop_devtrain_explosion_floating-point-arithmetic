@@ -1,7 +1,12 @@
 class MyFloat
+  @value = 0
+
+  def initialize(value = 0)
+    @value = value
+  end
 
   def value()
-    0
+    @value
   end
 
 end

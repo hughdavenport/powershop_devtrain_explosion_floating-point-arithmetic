@@ -7,6 +7,10 @@ RSpec.describe MyFloat do
        f = MyFloat.new
        expect(f.value).to eq 0
     end
+    it "should allow passing an integer constructor" do
+       f = MyFloat.new 1
+       expect(f.value).to eq 1
+    end
   end
 
 end
