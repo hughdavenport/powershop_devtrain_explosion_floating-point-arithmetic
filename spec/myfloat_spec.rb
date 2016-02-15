@@ -98,6 +98,12 @@ RSpec.describe MyFloat do
        f = f.add(zero)
        expect(f.value).to eq 0.15625
      end
+     it "should store -0.0 correctly" do
+       f = MyFloat.new 0b10000000000000000000000000000000
+       #                 SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       expect(f.value).to eql 0.0
+       expect(f.value.arg).not_to eql 0 # This tests whether the 0 is truely -0.0
+     end
   end
 
 end
