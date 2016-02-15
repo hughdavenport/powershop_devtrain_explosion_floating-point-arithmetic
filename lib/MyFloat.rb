@@ -3,6 +3,13 @@ class MyFloat
   # 1 bit sign, 8 bit exponent, 23 bit fraction
   OFFSET_BIAS = 127
 
+  SIGN_POSITION = 31
+  SIGN_BITS = 0x1
+  EXPONENT_POSITION = 23
+  EXPONENT_BITS = 0xff
+  FRACTION_POSITION = 0
+  FRACTION_BITS = 0x7fffff
+
   @value = 0
 
   def initialize(value = 0)
@@ -21,12 +28,12 @@ class MyFloat
 
   def sign()
     # 1 bit 31 bits offset
-    (@value >> 31) & 0x1
+    (@value >> SIGN_POSITION) & SIGN_BITS
   end
 
   def exponent()
     # 8 bits 23 bits offset
-    (@value >> 23) & 0xff
+    (@value >> EXPONENT_POSITION) & EXPONENT_BITS
   end
 
   def fraction()
@@ -42,14 +49,14 @@ class MyFloat
   end
 
   def fraction_bits()
-    @value & 0x7fffff
+    @value & FRACTION_BITS
   end
 
   def to_s()
     @value.to_s(2)
   end
 
-  def raw_val()
+  def raw_value()
     @value
   end
 
