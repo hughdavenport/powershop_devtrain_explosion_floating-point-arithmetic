@@ -84,6 +84,20 @@ RSpec.describe MyFloat do
        zero = one.add(negone)
        expect(zero.value).to equal 0.0
     end
+    it "adding anything to 0 should be the same value" do
+       f = MyFloat.new 0b00111110001000000000000000000000
+       #                 SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       zero = MyFloat.new
+       f = zero.add(f)
+       expect(f.value).to eq 0.15625
+     end
+    it "adding 0 to anything should be the same value" do
+       f = MyFloat.new 0b00111110001000000000000000000000
+       #                 SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       zero = MyFloat.new
+       f = f.add(zero)
+       expect(f.value).to eq 0.15625
+     end
   end
 
 end
