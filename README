@@ -1,0 +1,21 @@
+This is a ruby class aimed to implement floating point arithmetic using only integer internals and bitwise operations.
+
+This is done using IEEE 754 floating point standard.
+
+### Currently supported
+
+- Storage
+- Addition
+
+### Future work needed
+
+- Subtraction
+- Initialization from FixNum/Float/String types
+- Multiplication
+- Division
+- Remainder
+- ???
+
+### Copyright
+
+©2015 Powershop New Zealand Limited 
