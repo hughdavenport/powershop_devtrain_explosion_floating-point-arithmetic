@@ -94,6 +94,7 @@ class MyFloat
     while fraction_bits < (EXPLICIT_FRACTION_BIT)
       exponent -= 1
       fraction_bits <<= 1
+      break if exponent == 0
     end
     MyFloat.new ((sign << SIGN_POSITION) | (exponent << EXPONENT_POSITION) | (fraction_bits & FRACTION_BITS))
   end
