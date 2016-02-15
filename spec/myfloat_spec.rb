@@ -104,6 +104,18 @@ RSpec.describe MyFloat do
        expect(f.value).to eql 0.0
        expect(f.value.arg).not_to eql 0 # This tests whether the 0 is truely -0.0
      end
+     it "adding 0.0 to 0.0 should be 0.0" do
+       zero = MyFloat.new
+       zero = zero.add(zero)
+       expect(zero.value).to equal 0.0
+     end
+     it "adding -0.0 to -0.0 should still be -ve" do
+       f = MyFloat.new 0b10000000000000000000000000000000
+       #                 SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       f = f.add(f)
+       expect(f.value).to eql 0.0
+       expect(f.value.arg).not_to eql 0 # This tests whether the 0 is truely -0.0
+     end
   end
 
 end
