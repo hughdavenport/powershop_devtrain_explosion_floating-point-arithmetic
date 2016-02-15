@@ -17,6 +17,28 @@ RSpec.describe MyFloat do
        #                 SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
        expect(f.value).to eq 1.0
     end
+    it "adding 1.0 to 1.0 should equal 2.0 " do
+       one = MyFloat.new 0b00111111100000000000000000000000
+       #                   SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       two = one.add(one)
+       expect(two.value).to eq 2.0
+    end
+    it "adding 1.0 to 0.15625 should equal 1.15625 " do
+       one = MyFloat.new 0b00111111100000000000000000000000
+       #                   SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       f = MyFloat.new 0b00111110001000000000000000000000
+       #                 SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       fadd = one.add(f)
+       expect(fadd.value).to eq 1.15625
+    end
+    it "adding 0.156250 to 1.0 should equal 1.15625 " do
+       f = MyFloat.new 0b00111110001000000000000000000000
+       #                 SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       one = MyFloat.new 0b00111111100000000000000000000000
+       #                   SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       fadd = f.add(one)
+       expect(fadd.value).to eq 1.15625
+    end
   end
 
 end

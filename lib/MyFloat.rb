@@ -10,6 +10,9 @@ class MyFloat
   FRACTION_POSITION = 0
   FRACTION_BITS = 0x7fffff
 
+  # IEEE 754 has an explicit bit set above the fraction part (as in scientific notation)
+  EXPLICIT_FRACTION_BIT = 0x800000
+
   @value = 0
 
   def initialize(value = 0)
@@ -58,6 +61,27 @@ class MyFloat
 
   def raw_value()
     @value
+  end
+
+  def add(other)
+    result = @value
+    shift = exponent() - other.exponent()
+    sign = sign()
+    exponent = exponent()
+    fraction_bits = fraction_bits() | EXPLICIT_FRACTION_BIT # add in implicit 23rd bit
+    other_fraction_bits = other.fraction_bits | EXPLICIT_FRACTION_BIT
+    if shift > 0
+      other_fraction_bits >>= shift
+    elsif shift < 0
+      exponent = other.exponent()
+      fraction_bits >>= -shift
+    end
+    fraction_bits += other_fraction_bits
+    while fraction_bits >= (EXPLICIT_FRACTION_BIT << 1)
+      exponent += 1
+      fraction_bits >>= 1
+    end
+    MyFloat.new ((sign << SIGN_POSITION) | (exponent << EXPONENT_POSITION) | (fraction_bits & FRACTION_BITS))
   end
 
 end
