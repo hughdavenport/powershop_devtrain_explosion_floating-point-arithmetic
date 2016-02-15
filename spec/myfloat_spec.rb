@@ -5,7 +5,7 @@ RSpec.describe MyFloat do
   describe "value" do
     it "should have a value of 0 by default" do
        f = MyFloat.new
-       expect(f.value).to eq 0.0
+       expect(f.value).to equal 0.0
     end
     it "should represent 0.15625 correctly" do
        f = MyFloat.new 0b00111110001000000000000000000000
@@ -74,7 +74,7 @@ RSpec.describe MyFloat do
        one = MyFloat.new 0b00111111100000000000000000000000
        #                   SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
        zero = negone.add(one)
-       expect(zero.value).to eq 0.0
+       expect(zero.value).to equal 0.0
     end
   end
 

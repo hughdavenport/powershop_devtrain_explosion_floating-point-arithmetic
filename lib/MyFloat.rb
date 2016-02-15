@@ -24,7 +24,7 @@ class MyFloat
   def value()
     # Special value for 0
     if (fraction_bits() == 0 and exponent() == 0)
-      return sign() ? -0.0 : 0.0
+      return sign() == 1 ? -0.0 : 0.0
     end
     (-1)**sign() * fraction() * 2**(exponent()-OFFSET_BIAS)
   end
