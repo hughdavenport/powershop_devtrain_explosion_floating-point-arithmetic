@@ -66,10 +66,15 @@ class MyFloat
   def add(other)
     result = @value
     shift = exponent() - other.exponent()
-    sign = sign()
     exponent = exponent()
     fraction_bits = fraction_bits() | EXPLICIT_FRACTION_BIT # add in implicit 23rd bit
     other_fraction_bits = other.fraction_bits | EXPLICIT_FRACTION_BIT
+    if sign == 1
+      fraction_bits = (~fraction_bits) + 1
+    end
+    if other.sign == 1
+      other_fraction_bits = (~other_fraction_bits) + 1
+    end
     if shift > 0
       other_fraction_bits >>= shift
     elsif shift < 0
@@ -80,6 +85,15 @@ class MyFloat
     while fraction_bits >= (EXPLICIT_FRACTION_BIT << 1)
       exponent += 1
       fraction_bits >>= 1
+    end
+    while fraction_bits < (EXPLICIT_FRACTION_BIT)
+      exponent -= 1
+      fraction_bits <<= 1
+    end
+    sign = 0
+    if fraction_bits < 0
+      fraction_bits = (~fraction_bits) + 1
+      sign = 1
     end
     MyFloat.new ((sign << SIGN_POSITION) | (exponent << EXPONENT_POSITION) | (fraction_bits & FRACTION_BITS))
   end

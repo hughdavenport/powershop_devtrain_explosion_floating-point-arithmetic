@@ -39,6 +39,20 @@ RSpec.describe MyFloat do
        fadd = f.add(one)
        expect(fadd.value).to eq 1.15625
     end
+    it "should represent -1.0 correctly" do
+       f = MyFloat.new 0b10111111100000000000000000000000
+       #                 SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       expect(f.value).to eq -1.0
+    end
+    it "adding -1.0 to 2.0 should be 0.0" do
+       negone = MyFloat.new 0b10111111100000000000000000000000
+       #                      SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       one = MyFloat.new 0b00111111100000000000000000000000
+       #                   SEEEEEEEEFFFFFFFFFFFFFFFFFFFFFFF
+       two = one.add(one) # Tested earlier
+       one = negone.add(two)
+       expect(one.value).to eq 1.0
+    end
   end
 
 end
